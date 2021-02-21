@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "616450945539",
+    "project_id": "grubhouse-feff3",
+    "storage_bucket": "grubhouse-feff3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:616450945539:android:2654283762f13dbbc2d436",
+        "android_client_info": {
+          "package_name": "com.fablian.GRUPHOUSE"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "616450945539-1hpuehoi13tmusr45881j8lc474051h1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXVYeQtWxmp699W8dw7Ipn8C3V6TpkL9g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "616450945539-1hpuehoi13tmusr45881j8lc474051h1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
