@@ -543,7 +543,17 @@ export default class normalPProfile extends Component {
               }}
             >
               <View style={styles.iconContainer}>
-               
+                <Icon
+                  name="email-outline"
+                  reverse
+                  reverseColor="gray"
+                  color="#fff"
+                  type="material-community"
+                  size={20}
+                  iconStyle={styles.icon1}
+                  Component={TouchableOpacity}
+                  onPress={() => this.props.navigation.navigate("Message")}
+                />
               </View>
 
               {/* avatar container */}
@@ -555,12 +565,6 @@ export default class normalPProfile extends Component {
                   editButton={{name: 'mode-edit', type: 'material', color: '#fff', underlayColor: '#000'}}
                   showEditButton= {false}
                 />
-                <TouchableOpacity 
-                  style={styles.messageContainer}
-                  onPress={() => this.props.navigation.navigate("Message")}
-                >
-                  <Text style={styles.followText}>Messages</Text>
-                </TouchableOpacity>
                 <Text style={styles.naameText}>{this.props.navigation.state.params.client.first_name}</Text>
                 <TouchableOpacity 
                   style={this.state.followingState?styles.followingContainer:styles.followContainer}
@@ -577,7 +581,7 @@ export default class normalPProfile extends Component {
                 <TouchableOpacity
                   style={styles.favourateContainer}
                   // onPress={() => this.props.navigation.navigate("Favourites")}
-                  onPress={()=>getMyfavourite(this.props.navigation.state.params.client.client_id,this.props.navigation.state.params.client.first_name+" Favorite")}
+                  onPress={()=>getMyfavourite(this.props.navigation.state.params.client.client_id)}
                 >
                   <Text style={styles.numberText}>{this.state.favorite.length?this.state.favorite.length:0}</Text>
                   <Text style={styles.favourateText}>Favourite</Text>
@@ -643,38 +647,20 @@ export default class normalPProfile extends Component {
 const styles = StyleSheet.create({
   followContainer: {
     backgroundColor: global.COLOR.PRIMARY,
-    paddingHorizontal: 10,
+    borderRadius: 4,
+    paddingHorizontal: 4,
     paddingVertical: 2,
-    height: 30,
-    flexDirection:"row",
-    justifyContent: "center",
-    alignItems: "center",
     position: "absolute",
-    right: "15%",
-    bottom: 0
-  },
-  messageContainer: {
-    backgroundColor: "rgb(168, 255, 0)",
-    paddingHorizontal: 10,
-    paddingVertical: 2,
-    height: 40,
-    flexDirection:"row",
-    justifyContent: "center",
-    alignItems: "center",
-    position: "absolute",
-    left: "15%",
+    right: "20%",
     bottom: 0
   },
   followingContainer: {
     backgroundColor: "green",
-    paddingHorizontal: 10,
+    borderRadius: 4,
+    paddingHorizontal: 4,
     paddingVertical: 2,
-    height: 40,
-    flexDirection:"row",
-    justifyContent: "center",
-    alignItems: "center",
     position: "absolute",
-    right: "15%",
+    right: "20%",
     bottom: 0
   },
   followText: {

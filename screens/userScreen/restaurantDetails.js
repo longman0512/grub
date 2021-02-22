@@ -335,9 +335,7 @@ export default class detailsScreen extends Component {
             )}
           />
         </View>
-
         </View>
-        
         </ScrollView>
       </View>
     );

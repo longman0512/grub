@@ -13,13 +13,14 @@ import {
   Alert,
   BackHandler,
   Platform,
-  Image
+  Image,
 } from "react-native";
 import combo from "../../assets/combo.png";
 import { Icon, Button } from "react-native-elements";
 import global from "../../global";
 import { Divider } from "react-native-paper";
 import { ScrollView, TouchableHighlight } from "react-native-gesture-handler";
+// import {Image} from "react-native-expo-image-cache";
 import { 
   inserFavorite, 
   getRestaurantInfo, 
@@ -1286,10 +1287,30 @@ if(this.state.dataVSourceCords[this.state.dataVSourceCords.length-1].y<=value+14
                                   // PlaceholderContent={
                                   //   <Text>loading</Text>
                                   // }
-                                  source={{ uri: this.state.selectedCategory==d.category_name?cuisine.photo:"null" }}
+                                  source={{uri: cuisine.photo}}
+                                  // source={{ uri: this.state.selectedCategory==d.category_name?cuisine.photo:"null" }}
                                   style={styles.images}
                                   transition
                                 />
+                                {/* <FastImage
+                                  style={styles.images}
+                                  source={{
+                                      uri: cuisine.photo,
+                                      headers: { Authorization: 'someAuthToken' },
+                                      priority: FastImage.priority.normal,
+                                  }}
+                                  resizeMode={FastImage.resizeMode.contain}
+                              /> */}
+                              {/* <Image 
+                              ref={ref=>{
+                                this.cusineImages[i*100+index] = ref; 
+                                this.cuisineImagegFlag[i*100+index] = false
+                                this.imageCompressor(cuisine.photo)
+                              }}
+                              resizeMode={'cover'}
+                                style={styles.images}
+                                source={{uri: cuisine.photo}}
+                              /> */}
                               </TouchableOpacity>,
                               index+1==d.item.length?null:<View style={styles.divider}></View>
                             ]

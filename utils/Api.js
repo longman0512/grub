@@ -48,7 +48,7 @@ async function addressSaveI(location){
   Location.setGoogleApiKey("AIzaSyCej2vLb-XXyKoWeMzdAUynqZbq0YVmWi0")
   var address = await Location.reverseGeocodeAsync(location, {useGoogleMaps: true})
   var data = {
-    address: address[1].street+", "+address[1].postalCode,
+    address: address[1]?.street+", "+address[1]?.postalCode,
     full: address,
     latitude: location.latitude,
     longitude: location.longitude
@@ -85,7 +85,7 @@ async function addressSaveA(location){
   console.log(address)
 
   var data = {
-    address: address[1].street+", "+address[1].postalCode,
+    address: address[1]?.street+", "+address[1]?.postalCode,
     full: address,
     latitude: location.latitude,
     longitude: location.longitude

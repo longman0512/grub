@@ -68,12 +68,11 @@ export default class addressSearchScreen extends Component {
     this.props.navigation.setParams({
       handleThis: this.showSearch,
     });
-    this.showAlertModal()
-    // if(this.state.filterRestData.length == 0){
-    //   setTimeout(() => {
-    //     this.showAlertModal()
-    //   }, 3000);
-    // }
+    console.log(this.state.filterRestData.length, "before show modal")
+    // this.showAlertModal()
+    if(this.state.filterRestData.length == 0){
+      this.showAlertModal()
+    }
   }
   sendMail = () => {
     if(this.state.userEmail==""){
@@ -91,7 +90,6 @@ export default class addressSearchScreen extends Component {
         isHtml: true
       })
     }
-    
   }
   filter = (value)=>{   
     console.log(value)
