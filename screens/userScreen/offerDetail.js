@@ -88,12 +88,13 @@ export default class offerDetail extends Component {
                       />
                     </View>
                     <View style={{margin: 15, backgroundColor: "#fff", zIndex: 999}}>
-                      <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center", position: "relative"}}>
+                      <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
                         <Text style={styles.offerTitle}>{offer.offer_name}</Text>
-                        <Text style={{position: "absolute", right: 0,  borderRadius: 2, fontSize: 12, color: "#fff", padding: 2,  backgroundColor: offer.status=="publish"?"#1A73E8":"#F77D0E"}}>{offer.status}</Text>
+                        <Text style={{borderRadius: 2, fontSize: 12, color: "#fff", padding: 2,  backgroundColor: offer.status=="publish"?"#1A73E8":"#F77D0E"}}>{offer.status}</Text>
                       </View>
                       <View style={{marginBottom: 10}}><Text style={styles.contentText}>Save {Number(offer.offer_percentage).toFixed(0)}% when over £{Number(offer.offer_price).toFixed(0)}</Text></View>
-                      <View><Text style={styles.contentText}>From:&nbsp;{offer.valid_from}&nbsp;To:{offer.valid_to}</Text></View>
+                      <View>
+                        <Text style={styles.contentText}>From:&nbsp;{offer.valid_from}</Text><Text style={styles.contentText}>To:{offer.valid_to}</Text></View>
                     </View>
                   </View>
           })}

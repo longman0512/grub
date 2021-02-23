@@ -141,7 +141,6 @@ export default class message extends Component {
         reload: this.getMessage
       })
     }
-    
   }
   render() {
     return (
@@ -188,12 +187,12 @@ export default class message extends Component {
               <View style={styles.avatarContainer}>
                 {this.state.data[d][0].trigger_info.avatar?<Avatar rounded size={60} source={{ uri: "https://www.grubhouse.co.uk/upload/"+this.state.data[d][0].trigger_info.avatar }} />:<Avatar rounded size={60} title={this.state.data[d][0].trigger_info.first_name+this.state.data[d][0].trigger_info.last_name} />}
                 <Text style={styles.nameText}>
-                  {d}
+                  {d}  
                 </Text>
               </View>
               <View style={styles.infoContainer}>
                 <View style={styles.lastContainer}>
-                  <Text>Last message</Text>
+                  <Text>Last messageasss</Text>
                   <Text style={styles.dateText}>{this.state.data[d][0].date_created.substring(0, 10)}</Text>
                 </View>
                 <View style={styles.buttonContainer}>
@@ -222,7 +221,7 @@ export default class message extends Component {
                   {d.first_name + " "+d.last_name }
                 </Text>
               </View>
-              {/* <View style={styles.infoContainer}>
+              <View style={styles.infoContainer}>
                 <View style={styles.lastContainer}>
                   <Text>Last message</Text>
                   <Text style={styles.dateText}>{this.state.data[d][0].date_created.substring(0, 10)}</Text>
@@ -230,7 +229,7 @@ export default class message extends Component {
                 <View style={styles.buttonContainer}>
                   {this.getUnreadMsg(this.state.data[d])}
                 </View>
-              </View> */}
+              </View>
             </TouchableOpacity>
           )}
         />}

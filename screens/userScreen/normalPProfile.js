@@ -371,6 +371,27 @@ export default class normalPProfile extends Component {
       users: data.users,
     })
   }
+
+  
+  goMessage = ()=>{
+    console.log(this.props.navigation.state.params.client)
+    // if(typeof this.state.data[value.first_name]!= "undefined"){
+    //   console.log("have message")
+    //   this.props.navigation.navigate("SendMessage", {
+    //     msg: this.state.data[value.first_name],
+    //     reload: ()=>{}
+    //   })
+    // } else {
+    //   console.log("no message")
+      this.props.navigation.navigate("SendMessage", {
+        msg: [{
+          trigger_info: this.props.navigation.state.params.client
+        }],
+        reload: ()=>{}
+      })
+    // }
+  }
+
   render() {
     return (
       // back ground container
@@ -552,10 +573,16 @@ export default class normalPProfile extends Component {
                   size={20}
                   iconStyle={styles.icon1}
                   Component={TouchableOpacity}
-                  onPress={() => this.props.navigation.navigate("Message")}
+                  onPress={this.goMessage}
                 />
+                <TouchableOpacity 
+                  style={this.state.followingState?styles.followingContainer:styles.followContainer}
+                  onPress = {()=>{this.toggleFollow()}}
+                >
+                  <Text style={this.state.followingState?styles.followingText:styles.followText}>{this.state.followingState?"following":"follow"}</Text>
+                </TouchableOpacity>
               </View>
-
+              
               {/* avatar container */}
               <View style={styles.avatarContainer}>
                 <Avatar
@@ -566,12 +593,7 @@ export default class normalPProfile extends Component {
                   showEditButton= {false}
                 />
                 <Text style={styles.naameText}>{this.props.navigation.state.params.client.first_name}</Text>
-                <TouchableOpacity 
-                  style={this.state.followingState?styles.followingContainer:styles.followContainer}
-                  onPress = {()=>{this.toggleFollow()}}
-                >
-                  <Text style={styles.followText}>{this.state.followingState?"following":"follow"}</Text>
-                </TouchableOpacity>
+                
               </View>
               <View style={{width: "100%", position: "relative", height: 20}}>
                 
@@ -646,26 +668,36 @@ export default class normalPProfile extends Component {
 
 const styles = StyleSheet.create({
   followContainer: {
-    backgroundColor: global.COLOR.PRIMARY,
-    borderRadius: 4,
-    paddingHorizontal: 4,
-    paddingVertical: 2,
-    position: "absolute",
-    right: "20%",
-    bottom: 0
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: "rgb(114, 172, 226)",
+    height: 45,
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 130,
   },
   followingContainer: {
-    backgroundColor: "green",
-    borderRadius: 4,
-    paddingHorizontal: 4,
-    paddingVertical: 2,
-    position: "absolute",
-    right: "20%",
-    bottom: 0
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: "gray",
+    width: 130,
+    height: 45,
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center"
   },
   followText: {
-    color: "white",
-    fontSize: 16
+    color: "rgb(114, 172, 226)",
+    fontSize: 20
+  },
+  followingText: {
+    color: "gray",
+    fontSize: 20
   },
   notificationText: {
     fontSize: 16,
@@ -730,8 +762,10 @@ const styles = StyleSheet.create({
   iconContainer: {
     marginTop: global.CONSTANT.STATUSBAR + 10,
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
+    alignItems: "center",
     marginHorizontal: 20,
+    width: "100%",
     height: 60
     // backgroundColor: "rgba(0, 0, 0,0.1)"
   },
