@@ -48,7 +48,7 @@ export default class bills extends Component {
             source={global.ASSETS.DELIVERY}
             style={{marginHorizontal: 20, width: 50, height: 50, resizeMode: "cover"}}
           />
-          <Text style={{fontSize: 20, fontWeight: "bold"}}>Deliver in {this.props.navigation.state.params.allData.delivery_asap?delivery_date.getUTCHours()+":"+delivery_date.getUTCMinutes()+", "+delivery_date.toDateString():"ASAP"}</Text>
+          <Text style={{fontSize: 20, fontWeight: "bold"}}>Deliver in {this.props.navigation.state.params.allData.delivery_asap?"ASAP":delivery_date.getUTCHours()+":"+delivery_date.getUTCMinutes()+", "+delivery_date.toDateString()}</Text>
         </View>
         <MapView
           ref={(ref)=>{this.mapRef = ref}}
