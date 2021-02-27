@@ -60,7 +60,8 @@ export default class nearbyRestorants extends Component {
       mapLoading: false,
       userEmail: '',
       suggestAddress: '',
-      toemail: 'support@grubhouse.co.uk'
+      toemail: 'support@grubhouse.co.uk',
+      nearbyRestList: []
     };
   }
   success = (pos) => {
@@ -201,9 +202,10 @@ export default class nearbyRestorants extends Component {
       console.log("____--------------------------------------------------------------------------------------------", address)
       this.setState({ cAddress: address[0].street })
       let data = []
+      let restsData = []
       getNearBy(location)
         .then(response => {
-          response.details.map(async (rest, index) => {
+          response.details.data.map(async (rest, index) => {
             if(rest.opening){
               console.log(rest.opening)
             }
@@ -219,10 +221,7 @@ export default class nearbyRestorants extends Component {
               open_time: this.getServeTime(rest.stores_open_day, rest.stores_open_starts, rest.stores_open_ends, "start"),
               // review: rest.ratings==null? "0":rest.ratings.toFixed(2),
               close_time: this.getServeTime(rest.stores_open_day, rest.stores_open_starts, rest.stores_open_ends, "end"),
-              distance: this.getDistance({
-                lat: rest.latitude ? Number(rest.latitude) : 0,
-                lng: rest.lontitude ? Number(rest.lontitude) : 0
-              }),
+              distance: rest.distance,
               lat: rest.latitude ? rest.latitude : 0,
               lng: rest.lontitude ? rest.lontitude : 0,
               service: rest.service,
@@ -231,7 +230,33 @@ export default class nearbyRestorants extends Component {
               delivery_estimation: rest.delivery_estimation
             })
           })
-          this.setState({ nearbyList: data, loading: false })
+          response.details.merchants.map(async (rest, index) => {
+            if(rest.opening){
+              console.log(rest.opening)
+            }
+            restsData.push({
+              id: rest.merchant_id,
+              name: rest.restaurant_name,
+              fullAddress: rest.street + ", " + rest.city + ", " + rest.state,
+              address: rest.street,
+              image: rest.logo != "" ? "https://www.grubhouse.co.uk/upload/" + rest.logo : "https://www.grubhouse.co.uk/assets/images/lastsec.jpg",
+              price_level: 4,
+              cuisine: rest.cuisine,
+              rating: rest.rating,
+              open_time: this.getServeTime(rest.stores_open_day, rest.stores_open_starts, rest.stores_open_ends, "start"),
+              // review: rest.ratings==null? "0":rest.ratings.toFixed(2),
+              close_time: this.getServeTime(rest.stores_open_day, rest.stores_open_starts, rest.stores_open_ends, "end"),
+              distance: rest.distance,
+              lat: rest.latitude ? rest.latitude : 0,
+              lng: rest.lontitude ? rest.lontitude : 0,
+              service: rest.service,
+              slug: rest.restaurant_slug,
+              delivery_charges: rest.delivery_charges,
+              delivery_estimation: rest.delivery_estimation
+            })
+          })
+          this.setState({ nearbyList: data, nearbyRestList: restsData, loading: false })
+
           console.log("nearby restaurants data", data)
           this.searchComplete()
         });
@@ -555,12 +580,13 @@ export default class nearbyRestorants extends Component {
       address: rest.fullAddress,
       rating: rest.rating,
       slug: rest.slug,
+      service: rest.service,
       delivery_time:rest.delivery_estimation,
       amount: (rest.delivery_charges*1).toFixed(2),
     }
     gerMerchantMenu(rest.id).then((response)=>{
    
-    this.props.navigation.navigate("DetailsScreen", {
+    this.props.navigation.navigate("DetailsScreenNear", {
       merchant: merchant,
       data: response.details
     })
@@ -630,7 +656,7 @@ export default class nearbyRestorants extends Component {
               longitudeDelta: 0.0021,
             }}
           >
-            {this.state.nearbyList.length > 0 ? this.state.nearbyList.map((rest, index) => (
+            {this.state.nearbyRestList.length > 0 ? this.state.nearbyList.map((rest, index) => (
               <MapView.Marker
                 key={index + 0.2}
                 coordinate={{
@@ -726,7 +752,7 @@ export default class nearbyRestorants extends Component {
           </MapView>
         </Animated.View>
         {/* // background container */}
-        <Animated.View style={{ width: "100%", height: "100%", flexDirection: "column", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent", position: "absolute", top: this.state.scrollY }}>
+        <Animated.View style={{ width: "100%", height: "100%", flexDirection: "column", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent", position: "absolute", top: this.state.scrollY, paddingBottom: 20 }}>
           <ScrollView style={styles.bgContainer, { backgroundColor: "transparent", width: "100%" }}>
             {/* Map container */}
             <Text onPress={this.searchComplete} style={{ fontSize: 25, textAlign: "left", width: "100%", paddingBottom: 200, padding: 50, }} onPress={this.changeLocation}></Text>

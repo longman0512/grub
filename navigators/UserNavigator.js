@@ -49,6 +49,7 @@ import message from "../screens/userScreen/message";
 import sendMessage from "../screens/userScreen/messageSend";
 import inviteScreen from "../screens/userScreen/inviteScreen";
 import detailsScreen from "../screens/userScreen/detailsScreen";
+import detailsScreenNear from "../screens/userScreen/detailsScreenNear";
 import array from "../screens/userScreen/array";
 import followers from "../screens/userScreen/followers";
 import followingP from "../screens/userScreen/followingp";
@@ -149,6 +150,7 @@ export default createAppContainer(
       Search: createStackNavigator(
         {
           Nearby: { screen: nearbyRestorants },
+          DetailsScreenNear: { screen: detailsScreenNear },
           Details: { screen: restaurantDetails },
           CustomerBasket: { screen: customerBasket },
         },

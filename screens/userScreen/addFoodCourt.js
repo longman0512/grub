@@ -185,6 +185,7 @@ export default class addFoodCourt extends Component {
             var data = new FormData();
             var unix = Math.round(+new Date()/1000);
             var timestamp = unix+"000";
+            
             var data = new FormData();
             data.append("api_key", " admin@1474?");
             data.append("client_id", global.USER.details.client_info.client_id)

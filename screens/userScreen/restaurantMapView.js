@@ -137,7 +137,7 @@ export default class restaurantMapView extends Component {
       Math.sin(dLong / 2) * Math.sin(dLong / 2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c;
-    return (d/1000).toFixed(1)+"km"; // returns the distance in meter
+    return (d/1000/1.85).toFixed(1)+"miles"; // returns the distance in meter
   }
 
   deliveryOptions=(serviceType)=>{		

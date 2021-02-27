@@ -82,7 +82,13 @@ export default class following extends Component {
   }
 
   toggleFollow = async (client_id, item, flag)=>{
-
+    // for(var i = 0; i < this.state.following.length; i++){
+    //   if(this.state.following[i].client_id == client_id){
+    //     return <Text style={styles.removeText}>Following</Text>
+    //   } else {
+    //     return <Text style={styles.removeText}>Follow</Text>
+    //   }
+    // }
     await toggleFollowApi(client_id, flag, "self").then(res=>{
       this.setState({
         following: res.details.following,
@@ -105,17 +111,13 @@ export default class following extends Component {
             body: "You are removed from following by "+global.USER.details.client_info.first_name
           }, item)
           break;
-        
         case 'fRemove':
-          
           if(item.notification_flag==1)
             sendNotification(expoToken, {
               title: "Notification",
               body: global.USER.details.client_info.first_name+" doesn't follow you"
             }, item)
-          
           break;
-   
         case 'follow':
           if(item.notification_flag==1)
           sendNotification(expoToken, {
@@ -123,9 +125,7 @@ export default class following extends Component {
             body: global.USER.details.client_info.first_name+" follows you"
           }, item)
           break;
-   
         default:
-
       }
   }
   componentWillMount () {
@@ -153,6 +153,36 @@ export default class following extends Component {
         following: data.following,
         followers: data.followers,
       })
+  }
+  checkFollowingmem = (d)=>{
+    console.log(this.state.filteredFollowingData.length, "this is folloiwng that you follow")
+    if(this.state.filteredFollowingData.length){
+      for(var i = 0; i < this.state.filteredFollowingData.length; i++){
+        console.log(this.state.filteredFollowingData[i].client_id, d.client_id)
+        if(this.state.filteredFollowingData[i].client_id == d.client_id){
+          return <TouchableOpacity style={styles.removeContainer}
+          onPress = {()=>{this.toggleFollow(d.client_id, d, "fRemove")}}
+        >
+          <Text style={styles.removeText}>Following</Text>
+        </TouchableOpacity>
+        } else {
+          return <TouchableOpacity style={styles.removeContainer}
+          onPress = {()=>{this.toggleFollow(d.client_id, d, "follow")}}
+        >
+          <Text style={styles.removeText}>Follow</Text>
+        </TouchableOpacity>
+        }
+      }
+    } else {
+      return  <TouchableOpacity style={styles.removeContainer}
+                onPress = {()=>{this.toggleFollow(d.client_id, d, "follow")}}
+              >
+                <Text style={styles.removeText}>Follow</Text>
+              </TouchableOpacity>
+      
+    }
+
+    
   }
   render() {
     return (
@@ -296,11 +326,11 @@ export default class following extends Component {
               <View
                 style={{ flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}
               >
-                <TouchableOpacity style={styles.removeContainer}
-                  onPress = {()=>{this.toggleFollow(d.client_id, d, "follow")}}
-                >
-                  <Text style={styles.removeText}>Follow</Text>
-                </TouchableOpacity>
+                
+                  {
+                    this.checkFollowingmem(d)
+                  }
+                
               </View>
             </View>
           )}

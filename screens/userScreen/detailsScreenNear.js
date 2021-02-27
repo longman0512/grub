@@ -148,7 +148,7 @@ const DATA = {
   ],
 };
 let confirmDialog = ''
-class detailsScreen extends Component {
+class detailsScreenNear extends Component {
   static navigationOptions = {
     header: null
   };
@@ -1379,7 +1379,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(detailsScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(detailsScreenNear)
 
 const styles = StyleSheet.create({
   cartContainer: {
