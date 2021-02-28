@@ -13,7 +13,6 @@ export async function getPushNotificationPermissions () {
         finalStatus = status;
       }
       if (finalStatus === 'granted') {
-        console.log("granted", "dsfsdf")
         return true;
       }
       if (finalStatus !== 'granted') {
@@ -22,9 +21,6 @@ export async function getPushNotificationPermissions () {
           'You will not receive reminders if you do not enable push notifications. If you would like to receive reminders, please enable push notifications for Fin in your settings.',
           [
             { text: 'Cancel' },
-            // If they said no initially and want to change their mind,
-            // we can automatically open our app in their settings
-            // so there's less friction in turning notifications on
             { text: 'Enable Notifications', onPress: () => Platform.OS === 'ios' ? Linking.openURL('app-settings:') : Linking.openSettings() }
           ]
         )

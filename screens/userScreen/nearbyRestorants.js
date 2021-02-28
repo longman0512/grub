@@ -585,13 +585,12 @@ export default class nearbyRestorants extends Component {
       amount: (rest.delivery_charges*1).toFixed(2),
     }
     gerMerchantMenu(rest.id).then((response)=>{
-   
-    this.props.navigation.navigate("DetailsScreenNear", {
-      merchant: merchant,
-      data: response.details
-    })
-  })
-  }
+        this.props.navigation.navigate("DetailsScreenNear", {
+          merchant: merchant,
+          data: response.details
+        })
+      })
+    }
 
   render() {
     const screenHeight = Math.round(Dimensions.get('window').height);

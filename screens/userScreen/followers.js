@@ -100,7 +100,7 @@ export default class followers extends Component {
                     style={{flexDirection: "row", justifyContent: "center", alignItems: "center"}}
                     onPress = {()=>this.read(d)}
                   >
-                  {d.avatar?<Avatar rounded size={55} source={{ uri: "https://www.grubhouse.co.uk/upload/"+d.trigger_info[0].avatar }} />:<Avatar rounded size={55} title={d.first_name[0]+d.last_name[0]} />}
+                  {d.avatar?<Avatar rounded size={55} source={{ uri: "https://www.grubhouse.co.uk/upload/"+d?.trigger_info[0]?.avatar }} />:<Avatar rounded size={55} title={d?.first_name[0]?d?.first_name[0]:"N"+d?.last_name[0]?d?.last_name[0]:"N"} />}
                     <View style={{width: "65%"}}>
                       <Text
                         style={{marginLeft: 20, fontSize: 16, width: "100%"}}
