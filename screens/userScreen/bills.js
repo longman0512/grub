@@ -7,6 +7,7 @@ import { Card } from 'react-native-shadow-cards';
 import { ScrollView } from "react-native-gesture-handler";
 import { PayNow } from "../../utils/Api"
 // const paypal = require('@paypal/checkout-server-sdk');
+import StripeCheckout from 'expo-stripe-checkout';
 
 export default class bills extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -280,6 +281,18 @@ export default class bills extends Component {
 
           containerStyle={{marginHorizontal: 20, marginBottom: 20}}
           title={"Pay"}
+        />
+        <StripeCheckout
+          publicKey="sk_test_4eC39HqLyjWDarjtT1zdp7dc"
+          amount={100000}
+          imageUrl="https://pbs.twimg.com/profile_images/778378996580888577/MFKh-pNn_400x400.jpg"
+          storeName="Stripe Checkout"
+          description="Test"
+          currency="USD"
+          allowRememberMe={false}
+          prepopulatedEmail="test@test.com"
+          onClose={this.onClose}
+          onPaymentSuccess={this.onPaymentSuccess}
         />
         </ScrollView>
       </View>
